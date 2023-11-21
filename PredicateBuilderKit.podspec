@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PredicateBuilderKit'
-  s.version          = '1.1.4'
+  s.version          = '2.0.1'
   s.summary          = 'A short description of PredicateBuilderKit.'
 
 # This description is used to generate tags and improve search results.
@@ -21,6 +21,6 @@ TODO: Add long description of the pod here.
   
   s.ios.deployment_target = '13.0'
   s.source_files = 'PredicateBuilderKit/Classes/**/**/*'
-  s.frameworks = 'UIKit'
+  s.frameworks = 'CoreData'
   
 end
