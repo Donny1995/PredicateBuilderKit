@@ -69,7 +69,8 @@ public class PredicateBuilder: ImmutablePredicateBuilder {
     
     public enum Aggregation: String {
         case ANY
-        case SOME
+        //case SOME
+        @available(swift, obsoleted: 3.0, message: "This is not supported by CoreData")
         case ALL
         case NONE
     }
@@ -154,7 +155,7 @@ public class PredicateBuilder: ImmutablePredicateBuilder {
         var bakedPredicate = "\(build())"
         
         var indexCorrection = 0
-        let regex = try! NSRegularExpression(pattern: #"(\w+(?:\.[\w]+)*)\s+(>|>=|<|<=|!=|==|=|IN)"#, options: [])
+        let regex = try! NSRegularExpression(pattern: #"(\w+(?:\.[\w@]+)*)\s+(>|>=|<|<=|!=|==|=|IN)"#, options: [])
         for match in regex.matches(in: bakedPredicate, options: [], range: NSRange(location: 0, length: bakedPredicate.count)) {
             if match.numberOfRanges > 0 {
                 let insertionIndex = bakedPredicate.index(bakedPredicate.startIndex, offsetBy: match.range(at: 0).location + indexCorrection)
@@ -172,7 +173,7 @@ public class PredicateBuilder: ImmutablePredicateBuilder {
     }
     
     //NOT(...)
-    public func wrapIntoNegation() -> PredicateBuilder {
+    public func wrapIntoNegation() -> ImmutablePredicateBuilder {
         let builder = PredicateBuilder()
         builder.compoundExpression = NSCompoundPredicate(type: .not, subpredicates: [ build() ])
         return builder
