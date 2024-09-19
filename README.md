@@ -45,6 +45,11 @@
     .add(key: #keyPath(DBTicket.classifier.category.idd), relation: .in, value: ["water", "electricity"])
     //.build()
 
+  //ANY employees.role IN {"masster", "admin"}
+  let predicate3 = PredicateBuilder()
+    .addAggregation(key: #keyPath(DBOrganization.employees), subKey: #keyPath(DBOrganizationEmployee.role), relation: .in, value: ["masster", "admin"])
+    //.build()
+
   //SUBQUERY(employees, $s, $s.organization.idd == "1452").@count > 0
   let predicate2 = PredicateBuilder()
     .add(key: #keyPath(DBOrganizationEmployee.organization.idd), value: "1452")
@@ -58,12 +63,10 @@
 
 ## Installation
 
-To use `PredicateBuilder` in your project, add the source files to your project or include it via Swift Package Manager:
+To use `PredicateBuilder` in your project, add the source files to your project or include it via Cocoapods:
 
 ```swift
-dependencies: [
-    .package(url: "https://github.com/yourusername/PredicateBuilder.git", from: "1.0.0")
-]
+  pod 'PredicateBuilderKit', :git => 'git@github.com:Donny1995/PredicateBuilderKit.git'
 ```
 
 ## Getting Started
